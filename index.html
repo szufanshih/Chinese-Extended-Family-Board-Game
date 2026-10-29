@@ -225,7 +225,8 @@
            CENTER AREA: Clean, Spacious, Responsive
            Spans columns 2 to 7, rows 2 to 4
       =========================================== -->
-      <div class="col-start-2 col-end-8 row-start-2 row-end-5 p-2 sm:p-2.5 bg-white flex flex-col justify-between overflow-hidden relative">
+      <div id="centerArea" class="col-start-2 col-end-8 row-start-2 row-end-5 p-2 sm:p-2.5 bg-white overflow-hidden relative">
+      <div id="centerFit" class="flex flex-col justify-between" style="height: 100%">
 
         <!-- Slimmed Header: Title & Turn Controller -->
         <div class="flex items-center justify-between border-b border-slate-200 pb-1 gap-2">
@@ -286,10 +287,10 @@
         </div>
 
         <!-- A & B Dialogue Cards: Generous Spacing & Two-Line Answer Layout -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-1 sm:mt-2 pt-1 border-t border-slate-100">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-2 mt-1 sm:mt-2 pt-1 border-t border-slate-100">
           
           <!-- Card A: Question (No article: Do you have _____ ?) -->
-          <div onclick="speakSentencePrompt('A')" class="group border-2 border-slate-900 rounded-xl p-2 bg-white relative cursor-pointer hover:border-amber-500 hover:shadow-sm transition flex flex-col justify-center">
+          <div onclick="speakSentencePrompt('A')" class="md:col-span-2 group border-2 border-slate-900 rounded-xl p-2 bg-white relative cursor-pointer hover:border-amber-500 hover:shadow-sm transition flex flex-col justify-center">
             <span class="absolute -top-2.5 -left-1.5 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white border-2 border-slate-900 text-slate-900 flex items-center justify-center text-[10px] sm:text-xs font-black shadow">A</span>
             <div class="text-center">
               <div class="font-pinyin text-amber-700 font-black font-size-card-a-sub">
@@ -307,22 +308,19 @@
             </span>
           </div>
 
-          <!-- Card B: Two-Line Answers -->
-          <div class="group border-2 border-slate-900 rounded-xl p-1.5 sm:p-2 bg-white relative hover:border-rose-500 hover:shadow-sm transition flex flex-col justify-center">
+          <!-- Card B: Three-Line Answers -->
+          <div id="cardB" class="md:col-span-3 group border-2 border-slate-900 rounded-xl p-1.5 sm:p-2 bg-white relative hover:border-rose-500 hover:shadow-sm transition flex flex-col justify-center">
             <span class="absolute -top-2.5 -left-1.5 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white border-2 border-slate-900 text-slate-900 flex items-center justify-center text-[10px] sm:text-xs font-black shadow">B</span>
             
-            <div class="space-y-1">
-              <!-- Line 1: Positive (No article: I have _____ .) -->
+            <div class="space-y-0.5">
+              <!-- Line 1: Positive with counting (I have 1, 2, 3, 4 ___.) -->
               <div onclick="speakSentencePrompt('B1')" class="cursor-pointer hover:bg-rose-50/70 px-1.5 py-0.5 rounded transition flex items-center justify-between text-left">
                 <div>
                   <div class="font-pinyin text-rose-600 font-black font-size-card-b-sub">
-                    Wǒ yǒu _____ .
+                    Wǒ yǒu yī gè, liǎng gè, sān gè, sì gè _____ .
                   </div>
-                  <div class="font-cn font-black text-slate-900 font-size-card-b-zh">
-                    我 有 <span class="inline-block border-b-2 border-slate-900 w-8 sm:w-10 mx-0.5"></span>。
-                  </div>
-                  <div class="text-slate-600 font-bold font-size-card-b-sub">
-                    I have _____ .
+                  <div class="font-cn font-black text-slate-900 font-size-card-b-zh whitespace-nowrap">
+                    我 有 一个、两个、三个、四个 <span class="inline-block border-b-2 border-slate-900 w-8 sm:w-10 mx-0.5"></span>。
                   </div>
                 </div>
                 <span class="no-print text-slate-300 group-hover:text-rose-500 text-xs px-1">
@@ -333,27 +331,32 @@
               <!-- Thin divider -->
               <div class="border-t border-dashed border-slate-300"></div>
 
-              <!-- Line 2: Negative (I don't have it.) -->
-              <div onclick="speakSentencePrompt('B2')" class="cursor-pointer hover:bg-rose-50/70 px-1.5 py-0.5 rounded transition flex items-center justify-between text-left">
-                <div>
-                  <div class="font-pinyin text-rose-600 font-black font-size-card-b-sub">
-                    Wǒ méiyǒu.
+              <!-- Lines 2 + 3 side by side: 我没有。 | 我不知道。 -->
+              <div class="grid grid-cols-2">
+                <div onclick="speakSentencePrompt('B2')" class="cursor-pointer hover:bg-rose-50/70 px-1.5 py-0.5 rounded transition flex items-center justify-between text-left">
+                  <div>
+                    <div class="font-pinyin text-rose-600 font-black font-size-card-b-sub whitespace-nowrap">Wǒ méi yǒu.</div>
+                    <div class="font-cn font-black text-slate-900 font-size-card-b-zh whitespace-nowrap">我 没有。</div>
                   </div>
-                  <div class="font-cn font-black text-slate-900 font-size-card-b-zh">
-                    我 没有。
-                  </div>
-                  <div class="text-slate-600 font-bold font-size-card-b-sub">
-                    I don't have it.
-                  </div>
+                  <span class="no-print text-slate-300 group-hover:text-rose-500 text-xs px-1">
+                    <i class="fa-solid fa-volume-high"></i>
+                  </span>
                 </div>
-                <span class="no-print text-slate-300 group-hover:text-rose-500 text-xs px-1">
-                  <i class="fa-solid fa-volume-high"></i>
-                </span>
+                <div onclick="speakSentencePrompt('B3')" class="cursor-pointer hover:bg-rose-50/70 px-1.5 py-0.5 rounded transition flex items-center justify-between text-left border-l border-dashed border-slate-300">
+                  <div>
+                    <div class="font-pinyin text-rose-600 font-black font-size-card-b-sub whitespace-nowrap">Wǒ bù zhīdào.</div>
+                    <div class="font-cn font-black text-slate-900 font-size-card-b-zh whitespace-nowrap">我 不知道。</div>
+                  </div>
+                  <span class="no-print text-slate-300 group-hover:text-rose-500 text-xs px-1">
+                    <i class="fa-solid fa-volume-high"></i>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
+      </div>
       </div>
       <!-- END CENTER AREA -->
 
@@ -472,7 +475,7 @@
         <div class="bg-rose-50/70 border border-rose-200 rounded-2xl p-3">
           <div class="font-black text-rose-950 text-xs mb-2 flex items-center gap-1.5">
             <span class="w-4 h-4 rounded-full bg-rose-900 text-white flex items-center justify-center text-[10px]">B</span>
-            <span>中間 Ⓑ 回答框 (Answer Box B - 2 Lines)</span>
+            <span>中間 Ⓑ 回答框 (Answer Box B - 3 Lines)</span>
           </div>
 
           <!-- Slider 5: Card B Chinese -->
@@ -1084,16 +1087,18 @@
     function speakCurrentTile() {
       const tile = TILES[activeModalIndex];
       const hanzi = isSimplified ? tile.zh_s : tile.zh_t;
-      speakText(`${hanzi}。你有${hanzi}吗？我有${hanzi}。我没有${hanzi}。`);
+      speakText(`${hanzi}。你有${hanzi}吗？我有一个${hanzi}。我没有。我不知道。`);
     }
 
     function speakSentencePrompt(type) {
       if (type === 'A') {
         speakText('你有吗？你有哥哥吗？你有妹妹吗？');
       } else if (type === 'B1') {
-        speakText('我有。我有哥哥。我有妹妹。');
+        speakText('我有一个、两个、三个、四个。我有一个哥哥。我有两个妹妹。');
       } else if (type === 'B2') {
         speakText('我没有。');
+      } else if (type === 'B3') {
+        speakText('我不知道。');
       }
     }
 
@@ -1205,9 +1210,33 @@
       } catch(e) {}
     }
 
+    /* Auto-fit: if the center text is taller than the space, shrink it until it fits */
+    function fitCenter() {
+      const area = document.getElementById('centerArea');
+      const fit = document.getElementById('centerFit');
+      if (!area || !fit) return;
+      const cs = getComputedStyle(area);
+      const avail = area.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      let z = 1;
+      fit.style.zoom = 1;
+      fit.style.height = avail + 'px';
+      const cardB = document.getElementById('cardB');
+      const tooBig = () => fit.scrollHeight > fit.clientHeight + 1 || (cardB && cardB.scrollWidth > cardB.clientWidth + 1);
+      while (z > 0.55 && tooBig()) {
+        z -= 0.03;
+        fit.style.zoom = z;
+        fit.style.height = (avail / z) + 'px';
+      }
+    }
+    window.addEventListener('resize', fitCenter);
+    const _applyFontSizeVal = applyFontSizeVal;
+    applyFontSizeVal = function(key, val, shouldSave) { _applyFontSizeVal(key, val, shouldSave); fitCenter(); };
+
     window.onload = function() {
       loadFontSettings();
       initBoard();
+      fitCenter();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCenter);
       if ('speechSynthesis' in window) {
         window.speechSynthesis.getVoices();
       }
